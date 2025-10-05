@@ -1,76 +1,51 @@
 # STM32F401 + BMP280 + ESP8266 IoT Home
 
-This project uses an **STM32F401** microcontroller to read temperature and pressure data from a **BMP280** sensor via **I2C**, display the readings on an **LCD**, and transmit them over **UART** to an **ESP8266 (NodeMCU ESP-12E)** module.  
-The ESP8266 runs a **custom Arduino-based firmware** (since the original AT firmware was removed and not fully compatible) to forward the readings over Wi-Fi to a **Python web server** for live monitoring.
+This project uses an **STM32F401** to measure temperature and pressure with a **BMP280** sensor via **I2C**, display the data on an **LCD**, and send it to an **ESP8266 (NodeMCU ESP-12E)** using **UART**.  
+The ESP8266, programmed with a custom **Arduino firmware**, transmits readings over Wi-Fi to a **Python web server** for live monitoring in a browser.
 
 ---
 
 ## System Overview
 
+[BMP280] --I2C--> [STM32F401] --UART--> [ESP8266] --Wi-Fi--> [Python Web Server]
 
 ---
 
 ## Features
 
-- Reads temperature and air pressure from BMP280 using I2C  
-- Displays values on a 16x2 LCD connected to the STM32  
-- Sends readings to an ESP8266 module via UART  
-- ESP8266 runs Arduino firmware to post data to a web server  
-- Python script hosts a web page showing the latest readings, refreshed automatically  
-- Modular design: STM32 handles sensors and display, ESP8266 handles Wi-Fi communication
+- Reads temperature and pressure using BMP280  
+- Displays values on a 16x2 LCD  
+- LCD brightness adjustable via potentiometer  
+- Sends data to ESP8266 via UART  
+- ESP8266 posts readings to a Python web server  
+- Web page auto-refreshes every second
 
 ---
 
-## Hardware Components
+## Hardware
 
-| Component | Description |
-|------------|-------------|
-| STM32F401RE (Nucleo or similar) | Main controller |
-| BMP280 Sensor | I2C temperature and pressure sensor |
-| 16x2 LCD Display | Local visual output |
-| ESP8266 NodeMCU (ESP-12E) | Wi-Fi module for transmitting data |
-| PC or Laptop | Runs Python web server |
-
----
-
-## Software & Tools
-
-| Tool | Purpose |
-|------|----------|
-| STM32CubeIDE | STM32 firmware development |
-| Arduino IDE | Programming ESP8266 firmware |
-| Python 3 | Running the local web server |
-| BMP280 Library | Sensor communication |
-| Wi-Fi Client (ESP8266) | HTTP POST communication to server |
+| Component | Function |
+|------------|-----------|
+| STM32F401RE | Main microcontroller |
+| BMP280 | I2C temperature & pressure sensor |
+| 16x2 LCD | Displays readings locally |
+| Potentiometer | Adjusts LCD brightness |
+| ESP8266 NodeMCU | Wi-Fi transmission |
+| PC | Runs Python web server |
 
 ---
 
-## How It Works
+## Software
 
-1. The STM32F401 reads temperature and pressure data from the BMP280 sensor using I2C.  
-2. The data is displayed on the LCD for local viewing.  
-3. The STM32 then sends the readings via UART to the ESP8266.  
-4. The ESP8266, programmed using the Arduino IDE, connects to the Wi-Fi network and posts the data to the Python web server running on the PC.  
-5. The Python server displays the readings on a live-updating webpage that refreshes every second.
+- **STM32CubeIDE** – STM32 firmware  
+- **Arduino IDE** – ESP8266 firmware  
+- **Python 3** – `live_server.py` web server
+- 
+## Images
 
----
+System Setup:
+![553454542_3254298758062209_3833673561105896772_n](https://github.com/user-attachments/assets/4dcbbc2a-f2ea-4a1a-9397-7a200dc57e9b)
 
-## ESP8266 Firmware Notes
+Browser Screenshot:
+![553303486_652400094331798_1516934589024052846_n](https://github.com/user-attachments/assets/8be200f1-988b-4c1c-9c84-7c03fd4ae0fb)
 
-The ESP8266’s original AT firmware was removed because it caused compatibility issues.  
-It now runs a custom Arduino sketch, which handles:
-- Wi-Fi connection (SSID and password configured in code)
-- Sending sensor data via HTTP POST to the web server
-
----
-
-## Python Web Server
-
-A simple Python script (`live_server.py`) is included.  
-It uses the `http.server` library to:
-- Accept POST requests from the ESP8266 containing sensor readings  
-- Serve a web page showing the latest temperature and pressure, auto-refreshed every second
-
-Run the server using:
-```bash
-python live_server.py
