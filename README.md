@@ -43,9 +43,16 @@ The ESP8266, programmed with a custom **Arduino firmware**, transmits readings o
 - 
 ## Images
 
-System Setup:
-![553454542_3254298758062209_3833673561105896772_n](https://github.com/user-attachments/assets/4dcbbc2a-f2ea-4a1a-9397-7a200dc57e9b)
+**System Setup:**
 
-Browser Screenshot:
-![553303486_652400094331798_1516934589024052846_n](https://github.com/user-attachments/assets/8be200f1-988b-4c1c-9c84-7c03fd4ae0fb)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4dcbbc2a-f2ea-4a1a-9397-7a200dc57e9b" 
+       alt="System Setup" width="500">
+</p>
 
+**Browser Screenshot:**
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8be200f1-988b-4c1c-9c84-7c03fd4ae0fb" 
+       alt="Browser Screenshot" width="500">
+</p>
