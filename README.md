@@ -1,4 +1,4 @@
-# STM32F401 + BMP280 + ESP8266 IoT Home
+# STM32 IoT Sensor Hub
 
 This project uses an **STM32F401** to measure temperature and pressure with a **BMP280** sensor via **I2C**, display the data on an **LCD**, and send it to an **ESP8266 (NodeMCU ESP-12E)** using **UART**.  
 The ESP8266, programmed with a custom **Arduino firmware**, transmits readings over Wi-Fi to a **Python web server** for live monitoring in a browser.
